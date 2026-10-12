@@ -1,15 +1,9 @@
 name: Bootstrap remote directory
 on:
   workflow_dispatch:
-    inputs:
-      repository_name:
-        description: 'New repository name under the token owner'
-        required: true
-        default: '1031-exchange-directory'
-        type: string
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: bootstrap-1031-directory
@@ -20,62 +14,44 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      GH_TOKEN: ${{ secrets.DIRECTORY_BOOTSTRAP_TOKEN }}
-      TARGET_NAME: ${{ inputs.repository_name }}
       PUBLIC_SITE_URL: https://1031-exchange-directory.pages.dev
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Resolve remote account and refuse overwrite
-        run: |
-          set -euo pipefail
-          test -n "$GH_TOKEN"
-          if [[ ! "$TARGET_NAME" =~ ^[a-zA-Z0-9][a-zA-Z0-9._-]{0,99}$ ]]; then
-            echo "Invalid repository name"
-            exit 1
-          fi
-          TARGET_OWNER="$(gh api user --jq .login)"
-          if [[ "${TARGET_OWNER,,}" != "${GITHUB_REPOSITORY_OWNER,,}" ]]; then
-            echo "Run bootstrap in a repository owned by the same account as the token"
-            exit 1
-          fi
-          echo "TARGET_OWNER=$TARGET_OWNER" >> "$GITHUB_ENV"
-          if gh api "repos/$TARGET_OWNER/$TARGET_NAME" > /dev/null 2>&1; then
-            echo "Target exists; bootstrap will not overwrite it"
-            exit 1
-          fi
-
-      - name: Write exact repository files on remote runner
+      - name: Write exact repository files on runner
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
+
           payload = Path("exact-commit-files.json").read_text(encoding="utf-8")
           files = json.loads(payload)
-          root = Path("project")
-          root.mkdir()
-          for name, content in files.items():
-              path = root / name
-              path.parent.mkdir(parents=True, exist_ok=True)
-              path.write_text(content, encoding="utf-8")
+
+          for rel_path, content in files.items():
+              dest = Path(rel_path)
+              dest.parent.mkdir(parents=True, exist_ok=True)
+              dest.write_text(content, encoding="utf-8")
           PY
 
-      - name: Normalize baseline and create contract fixtures remotely
-        working-directory: project
+      - name: Normalize baseline and create contract fixtures
         run: |
           pip install -r pipeline/requirements.txt
           python pipeline/seed_data.py
           python pipeline/contract.py > /tmp/contract.json
 
-      - name: Generate npm lockfile and verify remotely
-        working-directory: project/site
+      - name: Generate npm lockfile and verify
+        working-directory: site
         run: |
           npm install --package-lock-only --ignore-scripts
           npm ci
@@ -84,15 +60,10 @@ jobs:
           npm run check
           npm run build
 
-      - name: Create repository and commit exact files remotely
-        working-directory: project
+      - name: Commit and push directory files
         run: |
-          set -euo pipefail
-          git init -b main
-          git config user.name "$TARGET_OWNER"
-          git config user.email "$TARGET_OWNER@users.noreply.github.com"
-          git add .
-          git commit -m "Initialize remote-only 1031 and cost segregation directory"
-          gh auth setup-git
-          gh repo create "$TARGET_OWNER/$TARGET_NAME" --private --source . --remote origin --push
-          printf 'Repository: https://github.com/%s/%s\n' "$TARGET_OWNER" "$TARGET_NAME" >> "$GITHUB_STEP_SUMMARY"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Bootstrap complete 1031 exchange directory project"
+          git push origin main
