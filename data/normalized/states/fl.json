@@ -1,0 +1,18 @@
+{
+  "sources": [
+    "https://floridarevenue.com/taxes/taxesfees/Pages/corporate.aspx"
+  ],
+  "reviewed_on": "2026-10-12",
+  "verification_status": "baseline",
+  "state_code": "FL",
+  "state_name": "Florida",
+  "capital_gains_tax_rate": 0.0,
+  "clawback_rules": false,
+  "clawback_form": null,
+  "key_statutory_notes": [
+    "Florida does not impose personal income tax. Federal 1031 rules still apply.",
+    "No Florida personal income-tax clawback is identified in this baseline. This does not describe corporate income tax.",
+    "Federal exchanges generally require identification within 45 days and completion within 180 days, subject to the tax-return deadline and extensions."
+  ],
+  "rate_description": "0% individual state income tax; corporations and federal taxation require separate review."
+}

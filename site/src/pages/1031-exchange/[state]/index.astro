@@ -1,0 +1,70 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import CostSegCalculator from '../../../components/CostSegCalculator';
+import type { Rules, QI } from '../../../content/config';
+export async function getStaticPaths() {
+  const states = await getCollection('states');
+  const providers = await getCollection('qi');
+  return states.map(({ data:s }) => ({
+    params:{ state:s.state_name.toLowerCase() },
+    props:{ rules:s, providers:providers.map(p=>p.data).filter(p=>p.coverage_type==='National'||p.state===s.state_code) },
+  }));
+}
+interface Props { rules:Rules; providers:QI[]; }
+const { rules:s, providers } = Astro.props;
+const url = new URL(Astro.url.pathname, Astro.site).href;
+const faqs = [
+  { question:'Does ' + s.state_name + ' apply one flat capital gains tax rate?', answer:s.rate_description },
+  { question:'What happens when replacement property is outside the state?', answer:s.clawback_rules
+    ? 'California-source deferred gain can remain reportable. Review FTB 3840 annual reporting and recognition rules with your tax adviser.'
+    : 'No personal income-tax clawback is identified in this baseline. Federal gain, residency in other states and entity-level tax still require review.' },
+  { question:'Are the listed intermediaries verified partners?', answer:'No. These are baseline provider candidates. Fees, bonding, escrow protections and service availability must be confirmed directly. National coverage does not establish suitability.' },
+];
+const graph = {
+  '@context':'https://schema.org',
+  '@graph':[
+    { '@type':'State','@id':url+'#state',name:s.state_name, containedInPlace:{'@type':'Country',name:'United States'} },
+    { '@type':'WebPage','@id':url,url,name:s.state_name+' 1031 Exchange Directory',
+      about:{'@id':url+'#state'}, mainEntity:{'@id':url+'#faq'} },
+    { '@type':'FAQPage','@id':url+'#faq', mainEntity:faqs.map(f=>({
+      '@type':'Question',name:f.question, acceptedAnswer:{'@type':'Answer',text:f.answer},
+    })) },
+    ...providers.map(p=>({ '@type':'FinancialService','@id':p.website+'#financial-service',
+      name:p.name,url:p.website,areaServed:p.coverage_type==='National'
+        ? {'@type':'Country',name:'United States'} : {'@id':url+'#state'},
+      description:'Qualified intermediary baseline candidate; terms require direct verification.' })),
+  ],
+};
+const money=(n:number|null)=>n===null?'Unknown':new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n);
+---
+<Base title={s.state_name+' 1031 Exchange Rules & Intermediaries'} description={s.rate_description} graph={graph}>
+<p class="muted">1031 EXCHANGE / {s.state_name.toUpperCase()}</p>
+<h1>{s.state_name}: compare the rules before choosing an intermediary.</h1>
+<section aria-labelledby="summary">
+<h2 id="summary">{s.state_name} tax rules: {s.rate_description}</h2>
+<p class={s.clawback_rules?'notice':''}>{s.clawback_rules
+  ? 'Clawback reporting notice: ' + s.clawback_form + ' may remain required when California property is exchanged for out-of-state replacement property.'
+  : 'No personal income-tax clawback identified in this baseline. This does not remove federal or entity-level tax obligations.'}</p>
+<ul>{s.key_statutory_notes.map(note=><li>{note}</li>)}</ul>
+<p class="muted">Editorial baseline review: <time datetime={s.reviewed_on}>{s.reviewed_on}</time>. Status: {s.verification_status}. Updates are not automatic legal verification.</p>
+<ul>{s.sources.map(source=><li><a href={source} target="_blank" rel="noopener noreferrer">Primary source: {new URL(source).hostname}</a></li>)}</ul>
+</section>
+<h2>Qualified intermediary candidates serving {s.state_name}</h2>
+<p>Unknown means no verified term in this dataset. Parent groups are shown to expose shared ownership; confirm current ownership directly.</p>
+<div class="table-scroll" role="region" aria-label="Intermediary comparison" tabindex="0">
+<table><caption>Baseline terms; request a written quote and escrow documentation.</caption>
+<thead><tr><th scope="col">Intermediary</th><th scope="col">Coverage / group</th><th scope="col">Bonding / escrow</th><th scope="col">Services / fee</th><th scope="col">Intake</th></tr></thead>
+<tbody>{providers.map(p=><tr>
+<th scope="row"><a href={p.website}>{p.name}</a><p class="muted">{p.verified_partner?'Verified partner':'Baseline candidate'}</p></th>
+<td>{p.coverage_type}<p>{p.parent_group??'Parent group unknown'}</p></td>
+<td>{money(p.bonded_amount_usd)}<p>{p.escrow_type??'Escrow terms unknown'}</p></td>
+<td>{p.services?.join(', ')??'Services unverified'}<p>{p.base_fee_range?money(p.base_fee_range.minimum_usd)+'–'+money(p.base_fee_range.maximum_usd):'Fee unknown'}</p></td>
+<td><a class="button" href={'/intake/?provider='+encodeURIComponent(p.entity_id)} aria-label={'Request Intake for '+p.name}>Request Intake</a></td>
+</tr>)}</tbody></table></div>
+<h2>Estimate the excess-basis depreciation scenario</h2>
+<CostSegCalculator client:visible />
+<section aria-labelledby="faq"><h2 id="faq">Questions answered</h2>
+{faqs.map(f=><article class="card"><h3>{f.question}</h3><p>{f.answer}</p></article>)}
+</section>
+</Base>

@@ -1,0 +1,19 @@
+{
+  "sources": [
+    "https://www.ftb.ca.gov/file/personal/income-types/capital-gains-and-losses.html",
+    "https://www.ftb.ca.gov/file/personal/reporting-like-kind-exchanges.html"
+  ],
+  "reviewed_on": "2026-10-12",
+  "verification_status": "baseline",
+  "state_code": "CA",
+  "state_name": "California",
+  "capital_gains_tax_rate": null,
+  "clawback_rules": true,
+  "clawback_form": "FTB 3840",
+  "key_statutory_notes": [
+    "California taxes capital gains as ordinary income; the applicable rate depends on taxable income and filing status.",
+    "Exchanging California real property for out-of-state property can preserve California-source deferred gain. Annual FTB 3840 reporting may continue through subsequent exchanges until recognition.",
+    "State conformity, residency, basis differences and applicable filing exceptions require review. This reporting obligation does not mean an immediate tax is due."
+  ],
+  "rate_description": "Variable: capital gains are taxed as ordinary income. No single taxpayer-independent rate."
+}

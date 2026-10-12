@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const states = await getCollection('states');
+---
+<Base title="1031 Exchange & Cost Segregation Directory" description="Compare 1031 exchange state rules and qualified intermediary candidates, with an explicit-assumption cost segregation calculator.">
+<p class="muted">STATE RULES · PROVIDER COMPARISONS · BASIS ESTIMATES</p>
+<h1>Keep the exchange rules and the depreciation assumptions visible.</h1>
+<p>Start with the state where your relinquished property is located. Compare provider candidates, inspect unknown terms, and estimate potential accelerated depreciation separately.</p>
+<div class="grid">{states.map(({ data:s }) => <article class="card">
+  <h2>{s.state_name}</h2><p>{s.rate_description}</p>
+  <p>{s.clawback_rules ? 'Out-of-state exchange reporting notice' : 'No personal income-tax clawback identified in baseline'}</p>
+  <a class="button" href={'/1031-exchange/' + s.state_name.toLowerCase() + '/'}>View {s.state_name} rules</a>
+</article>)}</div>
+<h2>Cost segregation after an exchange</h2>
+<p>A replacement property's purchase price is not automatically its depreciable tax basis. Use a CPA-confirmed excess basis and exclude land.</p>
+<a class="button" href="/cost-segregation/">Open calculator and provider comparison</a>
+</Base>

@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import { estimate, type Inputs } from '../src/lib/calculator';
+if(process.env.GITHUB_ACTIONS!=='true') throw new Error('Remote-only');
+const base:Inputs={propertyType:'Industrial',purchasePrice:2000000,landValue:400000,excessBasis:500000,allocationPercent:20,bonusPercent:0,placedMonth:1};
+assert.equal(estimate({...base,excessBasis:1600001}),null);
+assert.equal(estimate({...base,landValue:2000000}),null);
+assert.equal(estimate({...base,bonusPercent:101}),null);
+assert.equal(estimate({...base,placedMonth:1.5}),null);
+assert.equal(estimate({...base,purchasePrice:NaN}),null);
+assert.equal(estimate({...base,allocationPercent:0})?.incremental,0);
+const full=estimate({...base,allocationPercent:100,bonusPercent:100});
+assert.equal(full?.yearOne,500000);
+const zero=estimate(base)!;
+const bonus=estimate({...base,bonusPercent:100})!;
+assert.ok(bonus.yearOne>zero.yearOne);
+assert.ok(estimate({...base,placedMonth:12})!.baseline<zero.baseline);
+console.log('Calculator boundary and scenario checks passed');

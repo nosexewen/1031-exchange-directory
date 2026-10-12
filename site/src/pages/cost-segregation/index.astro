@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import CostSegCalculator from '../../components/CostSegCalculator';
+import { getCollection } from 'astro:content';
+const providers = await getCollection('costseg');
+const bool=(v:boolean|null)=>v===null?'Unknown':v?'Yes':'No';
+---
+<Base title="Cost Segregation Providers & Excess Basis Calculator" description="Compare baseline cost segregation provider candidates and estimate first-year depreciation using explicit excess-basis assumptions.">
+<h1>Cost segregation: compare terms and test a basis scenario.</h1>
+<h2>Accelerated depreciation depends on tax basis, asset classification and eligibility.</h2>
+<p>These providers are seed candidates. Accreditation, audit defense, pricing and specialties remain unverified. No partner tier is assigned without an agreement.</p>
+<div class="table-scroll" role="region" aria-label="Cost segregation comparison" tabindex="0">
+<table><caption>Cost segregation provider baseline comparison</caption>
+<thead><tr><th scope="col">Provider</th><th scope="col">Coverage</th><th scope="col">Engineers / audit defense</th><th scope="col">Fees / specialties</th><th scope="col">Intake</th></tr></thead>
+<tbody>{providers.map(({data:p})=><tr>
+<th scope="row"><a href={p.contact_endpoint}>{p.name}</a></th><td>{p.coverage.join(', ')}<p>Tier: {p.partner_tier??'Unassigned'}</p></td>
+<td>Accredited engineers: {bool(p.accredited_engineers)}<p>Audit defense: {bool(p.audit_defense_included)}</p></td>
+<td>{p.typical_fee_range?'$'+p.typical_fee_range.minimum_usd+'–$'+p.typical_fee_range.maximum_usd:'Fees unknown'}<p>{p.property_specialties?.join(', ')??'Specialties unverified'}</p></td>
+<td><a class="button" aria-label={'Request Intake for '+p.name} href={'/intake/?provider='+p.entity_id}>Request Intake</a></td>
+</tr>)}</tbody></table></div>
+<CostSegCalculator client:visible />
+</Base>

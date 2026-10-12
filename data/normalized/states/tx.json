@@ -1,0 +1,18 @@
+{
+  "sources": [
+    "https://comptroller.texas.gov/taxes/"
+  ],
+  "reviewed_on": "2026-10-12",
+  "verification_status": "baseline",
+  "state_code": "TX",
+  "state_name": "Texas",
+  "capital_gains_tax_rate": 0.0,
+  "clawback_rules": false,
+  "clawback_form": null,
+  "key_statutory_notes": [
+    "Texas does not impose an individual state income tax. A 1031 exchange can still defer eligible federal gain.",
+    "No Texas individual income-tax clawback is identified in this baseline. Texas franchise tax treatment requires separate entity-specific review.",
+    "Use a qualified intermediary before receiving sale proceeds; federal identification and completion deadlines generally remain 45 and 180 days."
+  ],
+  "rate_description": "0% individual state income tax; federal and entity-level taxes may still apply."
+}

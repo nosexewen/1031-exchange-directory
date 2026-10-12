@@ -1,0 +1,24 @@
+---
+import '../styles/global.css';
+interface Props { title:string; description:string; graph?:Record<string,unknown>; }
+const { title,description,graph } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const json = graph ? JSON.stringify(graph).replace(/</g, '\\u003c') : null;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {json && <script type="application/ld+json" set:html={json} />}
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header><nav aria-label="Primary"><a href="/">Exchange &amp; Basis</a><a href="/cost-segregation/">Cost segregation</a><a href="/methodology/">Methodology</a></nav></header>
+  <main id="main"><slot /></main>
+  <footer><p>Educational baseline directory. Provider terms require direct verification. Estimates do not establish tax eligibility. <a href="/privacy/">Privacy</a></p></footer>
+</body>
+</html>

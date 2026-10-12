@@ -1,0 +1,57 @@
+[
+  {
+    "state_code": "TX",
+    "state_name": "Texas",
+    "capital_gains_tax_rate": 0,
+    "clawback_rules": false,
+    "clawback_form": null,
+    "rate_description": "0% individual state income tax; federal and entity-level taxes may still apply.",
+    "key_statutory_notes": [
+      "Texas does not impose an individual state income tax. A 1031 exchange can still defer eligible federal gain.",
+      "No Texas individual income-tax clawback is identified in this baseline. Texas franchise tax treatment requires separate entity-specific review.",
+      "Use a qualified intermediary before receiving sale proceeds; federal identification and completion deadlines generally remain 45 and 180 days."
+    ],
+    "sources": [
+      "https://comptroller.texas.gov/taxes/"
+    ],
+    "reviewed_on": "2026-10-12",
+    "verification_status": "baseline"
+  },
+  {
+    "state_code": "FL",
+    "state_name": "Florida",
+    "capital_gains_tax_rate": 0,
+    "clawback_rules": false,
+    "clawback_form": null,
+    "rate_description": "0% individual state income tax; corporations and federal taxation require separate review.",
+    "key_statutory_notes": [
+      "Florida does not impose personal income tax. Federal 1031 rules still apply.",
+      "No Florida personal income-tax clawback is identified in this baseline. This does not describe corporate income tax.",
+      "Federal exchanges generally require identification within 45 days and completion within 180 days, subject to the tax-return deadline and extensions."
+    ],
+    "sources": [
+      "https://floridarevenue.com/taxes/taxesfees/Pages/corporate.aspx"
+    ],
+    "reviewed_on": "2026-10-12",
+    "verification_status": "baseline"
+  },
+  {
+    "state_code": "CA",
+    "state_name": "California",
+    "capital_gains_tax_rate": null,
+    "clawback_rules": true,
+    "clawback_form": "FTB 3840",
+    "rate_description": "Variable: capital gains are taxed as ordinary income. No single taxpayer-independent rate.",
+    "key_statutory_notes": [
+      "California taxes capital gains as ordinary income; the applicable rate depends on taxable income and filing status.",
+      "Exchanging California real property for out-of-state property can preserve California-source deferred gain. Annual FTB 3840 reporting may continue through subsequent exchanges until recognition.",
+      "State conformity, residency, basis differences and applicable filing exceptions require review. This reporting obligation does not mean an immediate tax is due."
+    ],
+    "sources": [
+      "https://www.ftb.ca.gov/file/personal/income-types/capital-gains-and-losses.html",
+      "https://www.ftb.ca.gov/file/personal/reporting-like-kind-exchanges.html"
+    ],
+    "reviewed_on": "2026-10-12",
+    "verification_status": "baseline"
+  }
+]

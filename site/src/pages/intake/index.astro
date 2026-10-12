@@ -1,0 +1,12 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProviderIntake from '../../components/ProviderIntake';
+import { getCollection } from 'astro:content';
+const qis = await getCollection('qi');
+const cs = await getCollection('costseg');
+const providers = [...qis.map(({data:p})=>({id:p.entity_id,name:p.name,url:p.website})),...cs.map(({data:p})=>({id:p.entity_id,name:p.name,url:p.contact_endpoint}))];
+---
+<Base title="Request directory intake" description="Submit interest to the directory operator or contact a provider directly.">
+<h1>Request intake</h1>
+<ProviderIntake providers={providers} client:only="react" />
+</Base>

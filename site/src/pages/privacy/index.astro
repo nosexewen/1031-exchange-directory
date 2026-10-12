@@ -1,0 +1,12 @@
+---
+import Base from '../../layouts/Base.astro';
+const contact=import.meta.env.PUBLIC_PRIVACY_CONTACT;
+---
+<Base title="Directory intake privacy" description="How directory intake requests are stored and deleted.">
+<h1>Intake privacy</h1>
+<p>Intake collects name, email, provider interest, optional property metrics and explicit consent. Cloudflare Turnstile processes a security challenge. No request information is committed to GitHub.</p>
+<p>Requests are stored in private Cloudflare KV for up to 30 days, then expire. Only the directory operator and authorized Cloudflare account administrators can access storage. No automatic provider forwarding occurs.</p>
+<p>The operator may respond by email to the requested analysis or intake. Sharing data with a provider requires further authorization. Do not submit tax returns, social security numbers or bank details.</p>
+<p>{contact?'Directory controller and deletion contact: '+contact:'The operator has not configured a privacy contact. Intake remains disabled until it is configured.'}</p>
+<p>Cloudflare provides hosting, storage and bot verification. Cross-border processing can occur. No analytics or advertising cookies are installed by this starter.</p>
+</Base>

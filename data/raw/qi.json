@@ -1,0 +1,92 @@
+[
+  {
+    "entity_id": "ipx1031",
+    "name": "IPX1031",
+    "state": "FL",
+    "coverage_type": "National",
+    "bonded_amount_usd": null,
+    "escrow_type": null,
+    "services": null,
+    "base_fee_range": null,
+    "website": "https://www.ipx1031.com/",
+    "verified_partner": false,
+    "parent_group": "Fidelity National Financial",
+    "reviewed_on": "2026-10-12",
+    "verification_status": "baseline",
+    "sources": [
+      "https://www.ipx1031.com/"
+    ]
+  },
+  {
+    "entity_id": "first-american-exchange",
+    "name": "First American Exchange",
+    "state": "UT",
+    "coverage_type": "National",
+    "bonded_amount_usd": null,
+    "escrow_type": null,
+    "services": null,
+    "base_fee_range": null,
+    "website": "https://www.firstexchange.com/",
+    "verified_partner": false,
+    "parent_group": "First American Financial",
+    "reviewed_on": "2026-10-12",
+    "verification_status": "baseline",
+    "sources": [
+      "https://www.firstexchange.com/"
+    ]
+  },
+  {
+    "entity_id": "asset-preservation",
+    "name": "Asset Preservation, Inc.",
+    "state": "CA",
+    "coverage_type": "National",
+    "bonded_amount_usd": null,
+    "escrow_type": null,
+    "services": null,
+    "base_fee_range": null,
+    "website": "https://www.apiexchange.com/",
+    "verified_partner": false,
+    "parent_group": "Stewart",
+    "reviewed_on": "2026-10-12",
+    "verification_status": "baseline",
+    "sources": [
+      "https://www.apiexchange.com/"
+    ]
+  },
+  {
+    "entity_id": "accruit",
+    "name": "Accruit",
+    "state": "CO",
+    "coverage_type": "National",
+    "bonded_amount_usd": null,
+    "escrow_type": null,
+    "services": null,
+    "base_fee_range": null,
+    "website": "https://www.accruit.com/",
+    "verified_partner": false,
+    "parent_group": "Inspira Financial",
+    "reviewed_on": "2026-10-12",
+    "verification_status": "baseline",
+    "sources": [
+      "https://www.accruit.com/"
+    ]
+  },
+  {
+    "entity_id": "exeter",
+    "name": "Exeter 1031 Exchange Services",
+    "state": "CA",
+    "coverage_type": "National",
+    "bonded_amount_usd": null,
+    "escrow_type": null,
+    "services": null,
+    "base_fee_range": null,
+    "website": "https://www.exeter1031.com/",
+    "verified_partner": false,
+    "parent_group": null,
+    "reviewed_on": "2026-10-12",
+    "verification_status": "baseline",
+    "sources": [
+      "https://www.exeter1031.com/"
+    ]
+  }
+]

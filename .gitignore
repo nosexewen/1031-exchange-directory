@@ -1,0 +1,10 @@
+site/node_modules/
+site/dist/
+site/.astro/
+site/src/content/qi/
+site/src/content/costseg/
+site/src/content/states/
+__pycache__/
+*.pyc
+.env*
+!.env.example

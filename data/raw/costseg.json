@@ -1,0 +1,56 @@
+[
+  {
+    "entity_id": "engineered-tax-services",
+    "name": "Engineered Tax Services",
+    "coverage": [
+      "National"
+    ],
+    "accredited_engineers": null,
+    "audit_defense_included": null,
+    "typical_fee_range": null,
+    "property_specialties": null,
+    "contact_endpoint": "https://engineeredtaxservices.com/",
+    "partner_tier": null,
+    "reviewed_on": "2026-10-12",
+    "verification_status": "baseline",
+    "sources": [
+      "https://engineeredtaxservices.com/"
+    ]
+  },
+  {
+    "entity_id": "kbkg",
+    "name": "KBKG",
+    "coverage": [
+      "National"
+    ],
+    "accredited_engineers": null,
+    "audit_defense_included": null,
+    "typical_fee_range": null,
+    "property_specialties": null,
+    "contact_endpoint": "https://www.kbkg.com/",
+    "partner_tier": null,
+    "reviewed_on": "2026-10-12",
+    "verification_status": "baseline",
+    "sources": [
+      "https://www.kbkg.com/"
+    ]
+  },
+  {
+    "entity_id": "cssi",
+    "name": "CSSI",
+    "coverage": [
+      "National"
+    ],
+    "accredited_engineers": null,
+    "audit_defense_included": null,
+    "typical_fee_range": null,
+    "property_specialties": null,
+    "contact_endpoint": "https://cssiservices.com/",
+    "partner_tier": null,
+    "reviewed_on": "2026-10-12",
+    "verification_status": "baseline",
+    "sources": [
+      "https://cssiservices.com/"
+    ]
+  }
+]

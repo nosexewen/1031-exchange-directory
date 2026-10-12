@@ -1,0 +1,18 @@
+{
+  "sources": [
+    "https://www.exeter1031.com/"
+  ],
+  "reviewed_on": "2026-10-12",
+  "verification_status": "baseline",
+  "entity_id": "exeter",
+  "name": "Exeter 1031 Exchange Services",
+  "state": "CA",
+  "coverage_type": "National",
+  "bonded_amount_usd": null,
+  "escrow_type": null,
+  "services": null,
+  "base_fee_range": null,
+  "website": "https://www.exeter1031.com/",
+  "verified_partner": false,
+  "parent_group": null
+}

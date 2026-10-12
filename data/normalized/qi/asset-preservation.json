@@ -1,0 +1,18 @@
+{
+  "sources": [
+    "https://www.apiexchange.com/"
+  ],
+  "reviewed_on": "2026-10-12",
+  "verification_status": "baseline",
+  "entity_id": "asset-preservation",
+  "name": "Asset Preservation, Inc.",
+  "state": "CA",
+  "coverage_type": "National",
+  "bonded_amount_usd": null,
+  "escrow_type": null,
+  "services": null,
+  "base_fee_range": null,
+  "website": "https://www.apiexchange.com/",
+  "verified_partner": false,
+  "parent_group": "Stewart"
+}

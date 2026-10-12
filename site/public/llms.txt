@@ -1,0 +1,10 @@
+# Exchange & Basis
+> Baseline 1031 exchange rules and provider comparisons with explicit unknowns. No verified partnerships are asserted.
+## State rules
+- [Texas](/1031-exchange/texas/): Individual state income tax summary and QI candidates.
+- [Florida](/1031-exchange/florida/): Individual tax summary and entity-tax scope limits.
+- [California](/1031-exchange/california/): Variable ordinary-income treatment and FTB 3840 reporting.
+## Cost segregation
+- [Providers and calculator](/cost-segregation/): Assumed excess-basis depreciation scenarios, not eligibility determinations.
+- [Methodology](/methodology/): Baseline verification status, model assumptions and sources.
+- [Privacy](/privacy/): Intake retention and operator contact.
